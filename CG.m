@@ -34,4 +34,4 @@ end
 % The conjugate gradient function takes two inputs: the matrix A and 
 % the vector b. In addition, it returns two important outputs including 
 %vector x and the number of iterations which we named as niters in this 
-%function
+%function.
