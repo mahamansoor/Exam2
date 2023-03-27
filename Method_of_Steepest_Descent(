@@ -1,0 +1,44 @@
+function [x, niters] = Method_of_Steepest_Descent(A, b)
+
+% Set initial guess for x
+n = length(b);
+x = zeros(n, 1);
+
+% Set convergence criterion and maximum number of iterations
+tol = 1e-6;
+maxit = 1000;
+
+% Calculate residual vector
+r = b - A*x;
+
+% Set initial search direction
+p = r;
+
+% Perform iteration until convergence or maximum iterations reached
+niters = 0;
+while (norm(r) > tol) && (niters < maxit)
+    % Calculate step size
+    alpha = (r'*r) / (p'*A*p);
+    
+    % Update x
+    x = x + alpha*p;
+    
+    % Update residual vector
+    rnew = r - alpha*A*p;
+    
+    % Update search direction
+    beta = (rnew'*rnew) / (r'*r);
+    p = rnew + beta*p;
+    
+    % Update residual and iteration counter
+    r = rnew;
+    niters = niters + 1;
+end
+
+% Display warning if maximum iterations reached without convergence
+if niters == maxit
+    warning('Method_of_Steepest_Descent:MaxItersReached', ...
+        'Maximum number of iterations reached without convergence');
+end
+
+end
