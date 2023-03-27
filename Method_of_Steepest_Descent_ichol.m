@@ -14,10 +14,10 @@ L = sparse(ichol(sparse(A)));
 
 % Define initial residual r0 and set k to 0
 r = b - A*x0;
-k = 0;
+k = 2000;
 
 % Start loop
-while norm(r) > 1e-10
+while norm(r) > 1e-7
 % Calculate p_k and q_k
 p = L' \ (L \ r);
 q = A*p;
