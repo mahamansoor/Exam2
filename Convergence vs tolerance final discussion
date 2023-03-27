@@ -1,0 +1,24 @@
+Q- In particular, change the tolerance.The idea now is to look at the number of iterations needed to convergence. The Method of
+Steepest Descent and CG each perform one matrix-vector multiplication per iteration. So those are easy to compare. The preconditioned versions 
+also perform the factorization (but only once) and triangular solves (for each iteration). This increases the cost per iteration, but
+reduces the number of iterations. Your final part of this assignment is to write a few sentences about what you observed
+when you ran the experiments. (Regarding iterations to convergence.) A final hint: In the last unit of Section 8.3 a stopping criteria is 
+discussed. It can be used for all your implementations.
+
+Stopping criteria (Notes)
+In theory, the Conjugate Gradient Method requires at most n iterations to achieve the condition where the residual is zero
+so that x(k) equals the exact solution. In practice, it is an iterative method due to the error introduced by floating point
+arithmetic. For this reason, the iteration proceeds while ∥r(k)∥2≥ϵmach∥b∥2 and some maximum number of iterations is not yet performed.
+
+The number of iterations are necessary to see if the solution is converging. Iterative convergence is related to the number of iterations 
+required to obtain residuals that are sufficiently close to 0 either for a steady state problem or for each time step in an unsteady problem. 
+When the number of iterations are set between 5 and 10, the solution is not that smooth but, as the number of iteration process progresses, the 
+curve start getting smoother for velocities and pressure. Hence the number of itertaions are used to get the best convergence and with lesser 
+iterations there will be no change in the solution. Although it will only increase the calculation time for the simulation. In this project, 
+when we increase the number of iterations to 2000, the convergence occurs and that's can be seen when our residual values are getting close to 0. 
+In addition, fewer iterations means more efficiency. This can be seen when we set the larger number of itertaions in steepest descent compared 
+to conjugate gradient descent. Hence, because conjugate gradient descent requires lesser iterations, and converges, it has more efficiency compared
+to steepest gradient method. The stopping criteria for conjugate gradient is lesser because it converges quickly as comapred to the stopping criteria
+for steepest gradient which converges slowly, has lesser efficiency and more stopping criteria. 
+
+
