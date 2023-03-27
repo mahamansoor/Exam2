@@ -18,7 +18,7 @@ x = x0;
 r = b - Ax;
 z = L'(L\r);
 p = z;
-niters = 0;
+niters = 500;
 while norm(r) > tol
 niters = niters + 1;
 q = Ap;
