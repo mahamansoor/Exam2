@@ -1,44 +1,36 @@
-function [x, niters] = Method_of_Steepest_Descent(A, b)
-
+function [x, niters] = Method_of_Steepest_Descent(A, b, x0) % this function is used to calculate steepest gradient without preconditioning
+% we can initialize some variables such as n and x 
 % Set initial guess for x
-n = length(b);
-x = zeros(n, 1);
-
+n = length(b); % we used n to make the dimension of the system 
+x = zeros(n, 1); % we can then set the initial guess for the solution 
 % Set convergence criterion and maximum number of iterations
-tol = 1e-6;
-maxit = 1000;
-
-% Calculate residual vector
-r = b - A*x;
-
-% Set initial search direction
+tol = 1e-6; % we set the tolerance rate equal to 1 x 10^-6
+maxit = 1000; % here we have set the number of iterations to 1000 ; compared to 500 iterations set for the conjugate gradient 
+% Calculate residual vector by substrating b from Ax 
+r = b - A*x; 
+% Set initial search direction; here we can set p = r 
 p = r;
-
-% Perform iteration until convergence or maximum iterations reached
-niters = 0;
-while (norm(r) > tol) && (niters < maxit)
-    % Calculate step size
+% we will perform iteration until our solution reached to convergence or maximum iterations...
+niters = 0; % the niters value is set to 0 for iteration counter 
+% we will apply the while loop 
+while (norm(r) > tol) && (niters < maxit) % in this while loop we will compare the norm vs tolerance and iteration counter vs iterations
+% Next we will calculate step size
     alpha = (r'*r) / (p'*A*p);
-    
-    % Update x
-    x = x + alpha*p;
-    
+% in the above step, we will find alpha value by dividing residual value by search direction variables    
+    % we will then update x
+    x = x + alpha*p;  
     % Update residual vector
-    rnew = r - alpha*A*p;
-    
+    rnew = r - alpha*A*p;   
     % Update search direction
     beta = (rnew'*rnew) / (r'*r);
-    p = rnew + beta*p;
-    
+    p = rnew + beta*p;    
     % Update residual and iteration counter
     r = rnew;
     niters = niters + 1;
 end
-
-% Display warning if maximum iterations reached without convergence
-if niters == maxit
+% Finally we will display warning if maximum iterations reached without convergence
+if niters == maxit % where we can iteration counter to equal equal iterations 
     warning('Method_of_Steepest_Descent:MaxItersReached', ...
         'Maximum number of iterations reached without convergence');
 end
-
 end
